@@ -1,0 +1,165 @@
+<div class="settings-container p-4">
+  <h2 class="mb-4 text-2xl font-bold text-center">Configurações</h2>
+
+  <div class="flex justify-content-center">
+    <div class="col-12 md:col-8 lg:col-6">
+      <!-- Card Aparência -->
+      <p-card header="Aparência" class="shadow-2 custom-card mb-4">
+        <div class="field">
+          <label for="theme" class="font-bold block mb-3">Tema</label>
+          <p-selectButton 
+            [options]="[
+              {label: 'Claro', value: 'light'},
+              {label: 'Escuro', value: 'dark'}
+            ]" 
+            [(ngModel)]="currentTheme"
+            (onChange)="onThemeChange()">
+          </p-selectButton>
+        </div>
+      </p-card>
+
+      <!-- Card Segurança -->
+      <p-card header="Segurança" class="shadow-2 custom-card mb-4">
+        <div class="field-checkbox mb-4">
+          <p-checkbox 
+            [(ngModel)]="autoLock" 
+            [binary]="true" 
+            inputId="autoLock">
+          </p-checkbox>
+          <label for="autoLock" class="ml-2">Bloqueio automático</label>
+        </div>
+
+        <div class="field mt-3" *ngIf="autoLock">
+          <label for="autoLockTime" class="font-bold block mb-2">
+            Tempo para bloqueio automático (minutos)
+          </label>
+          <p-inputNumber 
+            id="autoLockTime" 
+            [(ngModel)]="autoLockTime" 
+            [min]="1" 
+            [max]="60"
+            mode="decimal"
+            [showButtons]="true"
+            class="w-full">
+          </p-inputNumber>
+        </div>
+      </p-card>
+
+      <!-- Card Políticas de Senha -->
+      <p-card header="Políticas de Senha" class="shadow-2 custom-card mb-4">
+        <div class="policy-section">
+          <div class="field-checkbox mb-3">
+            <p-checkbox 
+              [(ngModel)]="passwordPolicy.requireUppercase" 
+              [binary]="true" 
+              inputId="requireUppercase"
+              (onChange)="updatePasswordPolicy()">
+            </p-checkbox>
+            <label for="requireUppercase" class="ml-2">Requerer letras maiúsculas</label>
+          </div>
+
+          <div class="field-checkbox mb-3">
+            <p-checkbox 
+              [(ngModel)]="passwordPolicy.requireLowercase" 
+              [binary]="true" 
+              inputId="requireLowercase"
+              (onChange)="updatePasswordPolicy()">
+            </p-checkbox>
+            <label for="requireLowercase" class="ml-2">Requerer letras minúsculas</label>
+          </div>
+
+          <div class="field-checkbox mb-3">
+            <p-checkbox 
+              [(ngModel)]="passwordPolicy.requireNumbers" 
+              [binary]="true" 
+              inputId="requireNumbers"
+              (onChange)="updatePasswordPolicy()">
+            </p-checkbox>
+            <label for="requireNumbers" class="ml-2">Requerer números</label>
+          </div>
+
+          <div class="field-checkbox mb-3">
+            <p-checkbox 
+              [(ngModel)]="passwordPolicy.requireSpecialChars" 
+              [binary]="true" 
+              inputId="requireSpecialChars"
+              (onChange)="updatePasswordPolicy()">
+            </p-checkbox>
+            <label for="requireSpecialChars" class="ml-2">Requerer caracteres especiais</label>
+          </div>
+
+          <div class="field-checkbox mb-3">
+            <p-checkbox 
+              [(ngModel)]="passwordPolicy.preventReuse" 
+              [binary]="true" 
+              inputId="preventReuse"
+              (onChange)="updatePasswordPolicy()">
+            </p-checkbox>
+            <label for="preventReuse" class="ml-2">Prevenir reutilização de senhas</label>
+          </div>
+        </div>
+
+        <div class="slider-section mt-4 pt-4">
+          <div class="field mb-4">
+            <label for="minLength" class="font-bold block mb-2">
+              Comprimento mínimo: {{ passwordPolicy.minLength }} caracteres
+            </label>
+            <p-slider 
+              [(ngModel)]="passwordPolicy.minLength"
+              [min]="8" 
+              [max]="20"
+              (onSlideEnd)="updatePasswordPolicy()"
+              class="w-full">
+            </p-slider>
+          </div>
+
+          <div class="field mb-4">
+            <label for="maxAgeDays" class="font-bold block mb-2">
+              Expirar senhas após: {{ passwordPolicy.maxAgeDays }} dias
+            </label>
+            <p-slider 
+              [(ngModel)]="passwordPolicy.maxAgeDays"
+              [min]="30" 
+              [max]="365"
+              (onSlideEnd)="updatePasswordPolicy()"
+              class="w-full">
+            </p-slider>
+          </div>
+        </div>
+
+        <p-divider class="my-4"></p-divider>
+
+        <div class="policy-footer flex justify-content-between align-items-center mt-3">
+          <small class="text-color-secondary flex align-items-center">
+            <i class="pi pi-info-circle mr-2"></i>
+            Políticas aplicadas a novas senhas
+          </small>
+          <p-button 
+            label="Gerar Exemplo" 
+            icon="pi pi-key" 
+            styleClass="p-button-outlined p-button-sm"
+            (onClick)="generateExamplePassword()">
+          </p-button>
+        </div>
+      </p-card>
+
+      <!-- Card Sobre -->
+      <p-card header="Sobre" class="shadow-2 custom-card">
+        <div class="about-content flex flex-column gap-3">
+          <div class="about-item flex align-items-center gap-3">
+            <i class="pi pi-lock text-primary"></i>
+            <span>SecureVault v1.0.0</span>
+          </div>
+          <div class="about-item flex align-items-center gap-3">
+            <i class="pi pi-github text-primary"></i>
+            <span>Angular 17 + PrimeNG</span>
+          </div>
+          <div class="about-item flex align-items-center gap-3">
+            <i class="pi pi-shield text-primary"></i>
+            <span>Seus dados estão seguros</span>
+          </div>
+        </div>
+      </p-card>
+    </div>
+  </div>
+</div>

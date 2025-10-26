@@ -1,0 +1,45 @@
+<div class="login-container flex align-items-center justify-content-center min-h-screen">
+  <p-toast></p-toast>
+  <p-card class="login-card shadow-5" [style]="{'width': '400px'}">
+    <ng-template pTemplate="header">
+      <div class="flex justify-content-center p-4">
+        <div class="flex align-items-center gap-2">
+          <i class="pi pi-lock" style="font-size: 2rem; color: var(--primary-color)"></i>
+          <span class="text-2xl font-bold">SecureVault</span>
+        </div>
+      </div>
+    </ng-template>
+
+    <div class="p-fluid">
+      <div class="field">
+        <label for="masterPassword">Senha Mestra</label>
+        <p-password 
+          id="masterPassword" 
+          [(ngModel)]="masterPassword" 
+          [feedback]="false" 
+          [toggleMask]="true"
+          placeholder="Digite sua senha mestra"
+          styleClass="w-full">
+        </p-password>
+      </div>
+
+      <small class="text-color-secondary block mt-2 mb-4">
+        Esta é a primeira vez? Digite uma senha forte para criar sua senha mestra.
+      </small>
+
+      <p-button 
+        label="Acessar Cofre" 
+        styleClass="w-full" 
+        [loading]="loading"
+        (onClick)="login()">
+      </p-button>
+    </div>
+
+    <ng-template pTemplate="footer">
+      <div class="text-center text-color-secondary text-sm">
+        <i class="pi pi-shield mr-2"></i>
+        Suas senhas são criptografadas localmente
+      </div>
+    </ng-template>
+  </p-card>
+</div>

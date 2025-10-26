@@ -1,0 +1,67 @@
+<div class="p-4">
+  <h2 class="mb-4">Dashboard</h2>
+
+  <div class="grid">
+    <!-- Estatistico -->
+    <div class="col-12 md:col-6 lg:col-3">
+      <p-card class="shadow-2 stat-card">
+        <div class="flex justify-content-between align-items-center">
+          <div>
+            <div class="text-2xl font-bold text-primary">{{ totalPasswords }}</div>
+            <div class="text-color-secondary">Senhas Salvas</div>
+          </div>
+          <i class="pi pi-key text-3xl text-primary"></i>
+        </div>
+      </p-card>
+    </div>
+
+    <div class="col-12 md:col-6 lg:col-3">
+      <p-card class="shadow-2 stat-card">
+        <div class="flex justify-content-between align-items-center">
+          <div>
+            <div class="text-2xl font-bold text-primary">{{ totalNotes }}</div>
+            <div class="text-color-secondary">Notas Salvas</div>
+          </div>
+          <i class="pi pi-file text-3xl text-primary"></i>
+        </div>
+      </p-card>
+    </div>
+
+    <!-- itens recentes -->
+    <div class="col-12">
+      <p-card header="Itens Recentes" class="shadow-2 mt-4">
+        <p-table [value]="recentItems" [paginator]="false" [rows]="5">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Tipo</th>
+              <th>Título</th>
+              <th>Categoria</th>
+              <th>Atualizado em</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-item>
+            <tr>
+              <td>
+                <i class="pi {{ item.icon }} mr-2"></i>
+                {{ item.type === 'password' ? 'Senha' : 'Nota' }}
+              </td>
+              <td>{{ item.title }}</td>
+              <td>
+                <span class="p-tag">{{ item.category }}</span>
+              </td>
+              <td>{{ formatDate(item.updatedAt) }}</td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td colspan="4" class="text-center p-4">
+                <i class="pi pi-inbox text-4xl text-color-secondary mb-2"></i>
+                <p class="text-color-secondary">Nenhum item recente.</p>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-card>
+    </div>
+  </div>
+</div>

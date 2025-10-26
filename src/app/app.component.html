@@ -1,0 +1,27 @@
+<div class="min-h-screen" [ngClass]="{'dark-theme': currentTheme === 'dark'}">
+  <!-- Menu Bar -->
+  <p-menubar [model]="menuItems" *ngIf="isLoggedIn" class="shadow-2">
+    <ng-template pTemplate="start">
+      <div class="flex align-items-center gap-2">
+        <i class="pi pi-lock" style="font-size: 1.5rem"></i>
+        <span class="font-bold text-xl">SecureVault</span>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="end">
+      <p-toggleButton 
+        [onLabel]="''" 
+        [offLabel]="''" 
+        [onIcon]="'pi pi-moon'" 
+        offIcon="pi pi-sun"
+        [ngModel]="currentTheme === 'dark'"
+        (onChange)="toggleTheme()"
+        styleClass="mr-2">
+      </p-toggleButton>
+    </ng-template>
+  </p-menubar>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+</div>

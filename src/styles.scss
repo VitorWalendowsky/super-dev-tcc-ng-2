@@ -1,0 +1,551 @@
+/* Fix for PrimeNG font loading issues */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Inter'), local('Inter-Regular');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: local('Inter Medium'), local('Inter-Medium');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Inter SemiBold'), local('Inter-SemiBold');
+}
+
+/* Force system fonts as fallback */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !important;
+}
+
+/* Override PrimeNG font usage */
+.p-component,
+.p-menubar,
+.p-card,
+.p-button,
+.p-inputtext,
+.p-dropdown,
+.p-checkbox,
+.p-slider,
+.p-selectbutton,
+.p-inputnumber {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !important;
+}
+
+/* Import PrimeNG */
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+@import "primeicons/primeicons.css";
+@import "primeflex/primeflex.css";
+
+/* Custom Variables - Light Theme */
+:root {
+  --primary-color: #2563eb;
+  --primary-color-dark: #1d4ed8;
+  --primary-color-light: #60a5fa;
+  
+  --success-color: #10b981;
+  --warning-color: #f59e0b;
+  --error-color: #ef4444;
+  --info-color: #3b82f6;
+  
+  --surface-ground: #f8fafc;
+  --surface-section: #ffffff;
+  --surface-card: #ffffff;
+  --surface-border: #e2e8f0;
+  --surface-hover: #f1f5f9;
+  
+  --text-color: #1e293b;
+  --text-color-secondary: #64748b;
+  --text-color-muted: #94a3b8;
+  
+  --border-radius: 8px;
+  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-2: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-5: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+}
+
+/* Dark Theme Variables */
+.dark-theme {
+  --primary-color: #3b82f6;
+  --primary-color-dark: #2563eb;
+  --primary-color-light: #60a5fa;
+  
+  --success-color: #10b981;
+  --warning-color: #f59e0b;
+  --error-color: #ef4444;
+  --info-color: #3b82f6;
+  
+  --surface-ground: #0f172a;
+  --surface-section: #1e293b;
+  --surface-card: #334155;
+  --surface-border: #475569;
+  --surface-hover: #475569;
+  
+  --text-color: #f1f5f9;
+  --text-color-secondary: #cbd5e1;
+  --text-color-muted: #94a3b8;
+  
+  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.4), 0 1px 2px -1px rgb(0 0 0 / 0.4);
+  --shadow-2: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4);
+  --shadow-5: 0 20px 25px -5px rgb(0 0 0 / 0.4), 0 8px 10px -6px rgb(0 0 0 / 0.4);
+}
+
+/* Global Styles */
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background-color: var(--surface-ground);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.min-h-screen {
+  min-height: 100vh;
+}
+
+.main-content {
+  min-height: calc(100vh - 64px);
+  background-color: var(--surface-ground);
+}
+
+/* ===== PRIMENG COMPONENT OVERRIDES ===== */
+
+/* Card */
+.p-card {
+  background: var(--surface-card) !important;
+  color: var(--text-color) !important;
+  border: 1px solid var(--surface-border) !important;
+  border-radius: var(--border-radius) !important;
+  
+  .p-card-title {
+    color: var(--text-color) !important;
+  }
+  
+  .p-card-subtitle {
+    color: var(--text-color-secondary) !important;
+  }
+  
+  .p-card-content {
+    color: var(--text-color) !important;
+  }
+}
+
+/* Menubar */
+.p-menubar {
+  background: var(--surface-section) !important;
+  border: none !important;
+  border-bottom: 1px solid var(--surface-border) !important;
+  border-radius: 0 !important;
+  
+  .p-menubar-root-list > .p-menuitem > .p-menuitem-link {
+    color: var(--text-color) !important;
+    
+    .p-menuitem-text {
+      color: var(--text-color) !important;
+    }
+    
+    .p-menuitem-icon {
+      color: var(--text-color-secondary) !important;
+    }
+    
+    &:not(.p-disabled):hover {
+      background: var(--surface-hover) !important;
+    }
+  }
+  
+  .p-menubar-end {
+    color: var(--text-color) !important;
+  }
+}
+
+/* Table */
+.p-datatable {
+  .p-datatable-header {
+    background: var(--surface-card) !important;
+    color: var(--text-color) !important;
+    border: 1px solid var(--surface-border) !important;
+  }
+  
+  .p-datatable-thead > tr > th {
+    background: var(--surface-section) !important;
+    color: var(--text-color) !important;
+    border-color: var(--surface-border) !important;
+  }
+  
+  .p-datatable-tbody > tr {
+    background: var(--surface-card) !important;
+    color: var(--text-color) !important;
+    
+    > td {
+      border-color: var(--surface-border) !important;
+      color: var(--text-color) !important;
+    }
+    
+    &:hover {
+      background: var(--surface-hover) !important;
+    }
+  }
+  
+  .p-paginator {
+    background: var(--surface-card) !important;
+    border-color: var(--surface-border) !important;
+    color: var(--text-color) !important;
+    
+    .p-paginator-page {
+      color: var(--text-color) !important;
+      
+      &.p-highlight {
+        background: var(--primary-color) !important;
+        color: white !important;
+      }
+    }
+  }
+}
+
+/* Dialog */
+.p-dialog {
+  .p-dialog-header {
+    background: var(--surface-card) !important;
+    color: var(--text-color) !important;
+    border-bottom: 1px solid var(--surface-border) !important;
+  }
+  
+  .p-dialog-content {
+    background: var(--surface-card) !important;
+    color: var(--text-color) !important;
+  }
+  
+  .p-dialog-footer {
+    background: var(--surface-card) !important;
+    border-top: 1px solid var(--surface-border) !important;
+  }
+}
+
+/* Input Fields */
+.p-inputtext {
+  background: var(--surface-card) !important;
+  border-color: var(--surface-border) !important;
+  color: var(--text-color) !important;
+  
+  &:enabled:hover {
+    border-color: var(--primary-color) !important;
+  }
+  
+  &:enabled:focus {
+    box-shadow: 0 0 0 2px var(--primary-color-light) !important;
+    border-color: var(--primary-color) !important;
+  }
+  
+  &::placeholder {
+    color: var(--text-color-muted) !important;
+  }
+}
+
+.p-password input {
+  background: var(--surface-card) !important;
+  border-color: var(--surface-border) !important;
+  color: var(--text-color) !important;
+}
+
+/* Buttons */
+.p-button {
+  &.p-button-text {
+    color: var(--primary-color) !important;
+    
+    &:enabled:hover {
+      background: rgba(59, 130, 246, 0.1) !important;
+    }
+  }
+  
+  &.p-button-outlined {
+    color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+    
+    &:enabled:hover {
+      background: rgba(59, 130, 246, 0.1) !important;
+    }
+  }
+}
+
+/* Dropdown */
+.p-dropdown {
+  background: var(--surface-card) !important;
+  border-color: var(--surface-border) !important;
+  color: var(--text-color) !important;
+  
+  .p-dropdown-label {
+    color: var(--text-color) !important;
+  }
+  
+  .p-dropdown-trigger {
+    color: var(--text-color-secondary) !important;
+  }
+  
+  .p-dropdown-panel {
+    background: var(--surface-card) !important;
+    border-color: var(--surface-border) !important;
+    
+    .p-dropdown-items .p-dropdown-item {
+      color: var(--text-color) !important;
+      
+      &:not(.p-highlight):not(.p-disabled):hover {
+        background: var(--surface-hover) !important;
+      }
+      
+      &.p-highlight {
+        background: var(--primary-color) !important;
+        color: white !important;
+      }
+    }
+  }
+}
+
+/* Checkbox */
+.p-checkbox {
+  .p-checkbox-box {
+    background: var(--surface-card) !important;
+    border-color: var(--surface-border) !important;
+    
+    &.p-highlight {
+      background: var(--primary-color) !important;
+      border-color: var(--primary-color) !important;
+    }
+    
+    .p-checkbox-icon {
+      color: white !important;
+    }
+  }
+}
+
+/* Slider */
+.p-slider {
+  .p-slider-range {
+    background: var(--primary-color) !important;
+  }
+  
+  .p-slider-handle {
+    background: var(--surface-card) !important;
+    border-color: var(--primary-color) !important;
+    
+    &:hover {
+      background: var(--primary-color) !important;
+    }
+  }
+}
+
+/* Toast */
+.p-toast {
+  .p-toast-message {
+    background: var(--surface-card) !important;
+    color: var(--text-color) !important;
+    border: 1px solid var(--surface-border) !important;
+    
+    .p-toast-message-content {
+      color: var(--text-color) !important;
+    }
+  }
+}
+
+/* Tag */
+.p-tag {
+  background: var(--primary-color-light) !important;
+  color: white !important;
+  
+  &.p-tag-success {
+    background: var(--success-color) !important;
+  }
+  
+  &.p-tag-warning {
+    background: var(--warning-color) !important;
+  }
+  
+  &.p-tag-danger {
+    background: var(--error-color) !important;
+  }
+}
+
+/* Progress Bar */
+.p-progressbar {
+  background: var(--surface-border) !important;
+  
+  .p-progressbar-value {
+    background: var(--primary-color) !important;
+  }
+}
+
+/* Divider */
+.p-divider {
+  .p-divider-content {
+    background: var(--surface-card) !important;
+  }
+  
+  &:before {
+    border-color: var(--surface-border) !important;
+  }
+}
+
+/* Toggle Button */
+.p-togglebutton {
+  background: var(--surface-card) !important;
+  border-color: var(--surface-border) !important;
+  color: var(--text-color) !important;
+  
+  &.p-highlight {
+    background: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+    color: white !important;
+  }
+}
+
+/* Select Button */
+.p-selectbutton {
+  .p-button {
+    background: var(--surface-card) !important;
+    border-color: var(--surface-border) !important;
+    color: var(--text-color) !important;
+    
+    &.p-highlight {
+      background: var(--primary-color) !important;
+      border-color: var(--primary-color) !important;
+      color: white !important;
+    }
+  }
+}
+
+/* Input Number */
+.p-inputnumber {
+  .p-inputnumber-button {
+    background: var(--surface-section) !important;
+    border-color: var(--surface-border) !important;
+    color: var(--text-color) !important;
+    
+    &:enabled:hover {
+      background: var(--surface-hover) !important;
+    }
+  }
+}
+
+/* ===== CUSTOM COMPONENT STYLES ===== */
+
+/* Login Styles */
+.login-container {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-color-dark) 100%) !important;
+}
+
+.login-card {
+  border-radius: 12px !important;
+  background: var(--surface-card) !important;
+  
+  .p-card {
+    background: var(--surface-card) !important;
+  }
+}
+
+/* Utility Classes */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.text-primary {
+  color: var(--primary-color) !important;
+}
+
+.text-color-secondary {
+  color: var(--text-color-secondary) !important;
+}
+
+.bg-surface-card {
+  background: var(--surface-card) !important;
+}
+
+.bg-surface-section {
+  background: var(--surface-section) !important;
+}
+
+/* Shadow Utilities */
+.shadow-2 {
+  box-shadow: var(--shadow-2) !important;
+}
+
+.shadow-5 {
+  box-shadow: var(--shadow-5) !important;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface-ground);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--surface-border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-color-secondary);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .p-menubar {
+    .p-menubar-root-list {
+      position: fixed;
+      top: 64px;
+      left: 0;
+      width: 100%;
+      background: var(--surface-section) !important;
+      border: 1px solid var(--surface-border) !important;
+    }
+  }
+}
+
+/* Fix for PrimeNG Icons in Dark Mode */
+.pi {
+  color: inherit !important;
+}
+
+/* Ensure all text has proper contrast */
+* {
+  color: inherit;
+}
+
+/* Fix for links */
+a {
+  color: var(--primary-color) !important;
+  
+  &:hover {
+    color: var(--primary-color-dark) !important;
+  }
+}
+
+/* Fix for disabled states */
+.p-disabled {
+  opacity: 0.6 !important;
+  
+  * {
+    color: var(--text-color-muted) !important;
+  }
+}

@@ -1,0 +1,23 @@
+.login-container {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-color-dark) 100%);
+  
+  .login-card {
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.95);
+    
+    ::ng-deep .p-card {
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+  }
+}
+
+:host ::ng-deep {
+  .p-password {
+    width: 100%;
+    
+    input {
+      width: 100%;
+    }
+  }
+}
