@@ -53,6 +53,11 @@ export class AppComponent implements OnInit {
           icon: 'pi pi-cog',
           routerLink: ['/settings']
         },
+         {
+        label: 'Vault Compartilhado',
+        icon: 'pi pi-share-alt',
+        routerLink: ['/shared-vault']
+        },
         {
           label: 'Sair',
           icon: 'pi pi-sign-out',
