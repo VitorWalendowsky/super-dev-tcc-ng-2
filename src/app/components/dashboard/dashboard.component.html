@@ -2,9 +2,9 @@
   <h2 class="mb-4">Dashboard</h2>
 
   <div class="grid">
-    <!-- Estatistico -->
+    <!-- Estatísticas com Links -->
     <div class="col-12 md:col-6 lg:col-3">
-      <p-card class="shadow-2 stat-card">
+      <p-card class="shadow-2 stat-card clickable-card" (click)="navigateToPasswords()">
         <div class="flex justify-content-between align-items-center">
           <div>
             <div class="text-2xl font-bold text-primary">{{ totalPasswords }}</div>
@@ -16,7 +16,7 @@
     </div>
 
     <div class="col-12 md:col-6 lg:col-3">
-      <p-card class="shadow-2 stat-card">
+      <p-card class="shadow-2 stat-card clickable-card" (click)="navigateToNotes()">
         <div class="flex justify-content-between align-items-center">
           <div>
             <div class="text-2xl font-bold text-primary">{{ totalNotes }}</div>
@@ -27,7 +27,32 @@
       </p-card>
     </div>
 
-    <!-- itens recentes -->
+    <!-- Cards adicionais (opcionais) -->
+    <div class="col-12 md:col-6 lg:col-3">
+      <p-card class="shadow-2 stat-card">
+        <div class="flex justify-content-between align-items-center">
+          <div>
+            <div class="text-2xl font-bold text-primary">{{ weakPasswordsCount }}</div>
+            <div class="text-color-secondary">Senhas Fracas</div>
+          </div>
+          <i class="pi pi-shield text-3xl text-warning"></i>
+        </div>
+      </p-card>
+    </div>
+
+    <div class="col-12 md:col-6 lg:col-3">
+      <p-card class="shadow-2 stat-card">
+        <div class="flex justify-content-between align-items-center">
+          <div>
+            <div class="text-2xl font-bold text-primary">{{ expiredItemsCount }}</div>
+            <div class="text-color-secondary">Itens Expirados</div>
+          </div>
+          <i class="pi pi-clock text-3xl text-danger"></i>
+        </div>
+      </p-card>
+    </div>
+
+    <!-- Itens Recentes -->
     <div class="col-12">
       <p-card header="Itens Recentes" class="shadow-2 mt-4">
         <p-table [value]="recentItems" [paginator]="false" [rows]="5">
@@ -37,6 +62,7 @@
               <th>Título</th>
               <th>Categoria</th>
               <th>Atualizado em</th>
+              <th>Ações</th>
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-item>
@@ -50,17 +76,140 @@
                 <span class="p-tag">{{ item.category }}</span>
               </td>
               <td>{{ formatDate(item.updatedAt) }}</td>
+              <td>
+                <button 
+                  pButton 
+                  icon="pi pi-eye" 
+                  class="p-button-text p-button-sm"
+                  (click)="viewItem(item)"
+                  pTooltip="Ver detalhes"
+                  tooltipPosition="top">
+                </button>
+                <button 
+                  pButton 
+                  icon="pi pi-pencil" 
+                  class="p-button-text p-button-sm"
+                  (click)="editItem(item)"
+                  pTooltip="Editar"
+                  tooltipPosition="top">
+                </button>
+              </td>
             </tr>
           </ng-template>
           <ng-template pTemplate="emptymessage">
             <tr>
-              <td colspan="4" class="text-center p-4">
+              <td colspan="5" class="text-center p-4">
                 <i class="pi pi-inbox text-4xl text-color-secondary mb-2"></i>
                 <p class="text-color-secondary">Nenhum item recente.</p>
+                <p-button 
+                  label="Adicionar Primeira Senha" 
+                  icon="pi pi-plus"
+                  (click)="navigateToPasswords()"
+                  styleClass="p-button-outlined mt-2">
+                </p-button>
               </td>
             </tr>
           </ng-template>
         </p-table>
+
+        <div class="flex justify-content-between mt-3">
+          <small class="text-color-secondary">
+            Mostrando os últimos {{ recentItems.length }} itens
+          </small>
+          <p-button 
+            label="Ver Todos" 
+            icon="pi pi-list"
+            styleClass="p-button-text p-button-sm"
+            (click)="navigateToAllItems()">
+          </p-button>
+        </div>
+      </p-card>
+    </div>
+
+    <!-- Ações Rápidas -->
+    <div class="col-12 md:col-6">
+      <p-card header="Ações Rápidas" class="shadow-2 mt-4">
+        <div class="grid">
+          <div class="col-12 md:col-6">
+            <button 
+              pButton 
+              label="Nova Senha" 
+              icon="pi pi-key" 
+              class="w-full mb-2"
+              (click)="navigateToNewPassword()">
+            </button>
+          </div>
+          <div class="col-12 md:col-6">
+            <button 
+              pButton 
+              label="Nova Nota" 
+              icon="pi pi-file" 
+              class="w-full mb-2 p-button-outlined"
+              (click)="navigateToNewNote()">
+            </button>
+          </div>
+          <div class="col-12 md:col-6">
+            <button 
+              pButton 
+              label="Gerador de Senhas" 
+              icon="pi pi-cog" 
+              class="w-full mb-2 p-button-secondary"
+              (click)="navigateToPasswordGenerator()">
+            </button>
+          </div>
+          <div class="col-12 md:col-6">
+            <button 
+              pButton 
+              label="Importar/Exportar" 
+              icon="pi pi-download" 
+              class="w-full mb-2 p-button-help"
+              (click)="navigateToImportExport()">
+            </button>
+          </div>
+        </div>
+      </p-card>
+    </div>
+
+    <!-- Status de Segurança -->
+    <div class="col-12 md:col-6">
+      <p-card header="Status de Segurança" class="shadow-2 mt-4">
+        <div class="flex flex-column gap-3">
+          <div class="flex justify-content-between align-items-center">
+            <span>Força das Senhas</span>
+            <p-progressBar 
+              [value]="passwordStrengthScore" 
+              [showValue]="false"
+              styleClass="w-6rem">
+            </p-progressBar>
+            <span class="text-sm font-medium">{{ passwordStrengthScore }}%</span>
+          </div>
+          
+          <div class="flex justify-content-between align-items-center">
+            <span>Senhas Expiradas</span>
+            <span class="p-tag p-tag-danger">{{ expiredItemsCount }}</span>
+          </div>
+          
+          <div class="flex justify-content-between align-items-center">
+            <span>Backup Recente</span>
+            <span class="p-tag p-tag-success">Atualizado</span>
+          </div>
+          
+          <div class="flex justify-content-between align-items-center">
+            <span>Autenticação</span>
+            <span class="p-tag p-tag-warning">2FA Desativado</span>
+          </div>
+        </div>
+        
+        <p-divider></p-divider>
+        
+        <div class="text-center">
+          <p-button 
+            label="Melhorar Segurança" 
+            icon="pi pi-shield"
+            styleClass="p-button-outlined p-button-sm"
+            (click)="navigateToSecurity()">
+          </p-button>
+        </div>
       </p-card>
     </div>
   </div>

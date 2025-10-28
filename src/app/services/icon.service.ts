@@ -164,12 +164,12 @@ export class IconService {
     return domain.replace(/^www\./, '');
   }
 
-  // Método para adicionar ícones customizados dinamicamente
+  // Método para adicionar ícones customizados
   addCustomIcon(domain: string, icon: BrandIcon): void {
     this.brandIcons.set(domain, icon);
   }
 
-  // Obter todos os domínios mapeados (para debug)
+  // Obter todos os domínios mapeados
   getMappedDomains(): string[] {
     return Array.from(this.brandIcons.keys());
   }

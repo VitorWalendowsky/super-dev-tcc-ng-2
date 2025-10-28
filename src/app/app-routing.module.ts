@@ -6,6 +6,8 @@ import { PasswordsComponent } from './components/passwords/passwords.component';
 import { NotesComponent } from './components/notes/notes.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { AuthGuard } from './guards/auth.guard';
+import { SharedVaultComponent } from './components/shared-vault/shared-vault.component';
+
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -13,8 +15,10 @@ const routes: Routes = [
   { path: 'passwords', component: PasswordsComponent, canActivate: [AuthGuard] },
   { path: 'notes', component: NotesComponent, canActivate: [AuthGuard] },
   { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
+  { path: 'shared-vault', component: SharedVaultComponent, canActivate: [AuthGuard] },
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-  { path: '**', redirectTo: '/dashboard' }
+  { path: '**', redirectTo: '/dashboard' },
+  
 ];
 
 @NgModule({

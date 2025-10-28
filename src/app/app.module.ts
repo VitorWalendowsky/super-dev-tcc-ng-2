@@ -41,7 +41,7 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { PasswordGeneratorComponent } from './components/password-generator/password-generator.component';
 
 // Services
-import { IconService } from './services/icon.service'; // ← Adicionar esta linha
+import { IconService } from './services/icon.service';
 
 @NgModule({
   declarations: [
@@ -87,7 +87,7 @@ import { IconService } from './services/icon.service'; // ← Adicionar esta lin
   ],
   providers: [
     MessageService,
-    IconService // ← Adicionar ao providers
+    IconService 
   ],
   bootstrap: [AppComponent]
 })

@@ -21,7 +21,6 @@ export class ThemeService {
     this.currentTheme.next(theme);
     localStorage.setItem(this.THEME_KEY, theme);
     
-    // Aplicar a classe no body
     if (theme === 'dark') {
       document.body.classList.add('dark-theme');
     } else {

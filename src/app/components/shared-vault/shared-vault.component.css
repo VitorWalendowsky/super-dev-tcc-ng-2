@@ -1,0 +1,230 @@
+.shared-vault-container {
+  min-height: 100vh;
+  background-color: var(--surface-ground);
+  padding: 1rem;
+}
+
+.stat-card {
+  background: var(--surface-card);
+  border: 1px solid var(--surface-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  transition: transform 0.2s;
+  
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+/* Tabs customizadas */
+.tab-container {
+  .tab-header {
+    display: flex;
+    border-bottom: 1px solid var(--surface-border);
+    margin-bottom: 1rem;
+    
+    .tab-button {
+      background: transparent;
+      border: none;
+      color: var(--text-color-secondary);
+      cursor: pointer;
+      padding: 0.75rem 1rem;
+      border-radius: 8px 8px 0 0;
+      transition: all 0.2s;
+      
+      &.active {
+        background: var(--primary-color);
+        color: white;
+      }
+      
+      &:hover:not(.active) {
+        background: var(--surface-hover);
+      }
+    }
+  }
+}
+
+/* Tabela customizada */
+.table-container {
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    
+    th {
+      font-weight: 600;
+      background: var(--surface-section);
+      padding: 0.75rem;
+      text-align: left;
+      border-bottom: 1px solid var(--surface-border);
+    }
+    
+    td {
+      padding: 0.75rem;
+      border-bottom: 1px solid var(--surface-border);
+    }
+    
+    tr {
+      transition: background-color 0.2s;
+      
+      &:hover {
+        background-color: var(--surface-hover) !important;
+      }
+    }
+  }
+}
+
+/* Tags */
+.tag {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  
+  &.tag-password {
+    background: var(--primary-color);
+    color: white;
+  }
+  
+  &.tag-note {
+    background: var(--warning-color);
+    color: white;
+  }
+  
+  &.tag-read_only {
+    background: var(--info-color);
+    color: white;
+  }
+  
+  &.tag-read_write {
+    background: var(--success-color);
+    color: white;
+  }
+}
+
+/* Avatares */
+.avatar-small {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--primary-color);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  
+  &.avatar-more {
+    background: var(--surface-border);
+    color: var(--text-color-secondary);
+  }
+}
+
+.avatar-group {
+  display: flex;
+  
+  .avatar-small {
+    margin-left: -0.5rem;
+    border: 2px solid var(--surface-card);
+    
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}
+
+/*  Cards de grupo */
+.group-card {
+  background: var(--surface-card);
+  border: 1px solid var(--surface-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  }
+}
+
+/* Animações */
+.fade-in {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Utilitários */
+.text-expired {
+  color: var(--error-color) !important;
+}
+
+.text-expiring {
+  color: var(--warning-color) !important;
+}
+
+.text-valid {
+  color: var(--success-color) !important;
+}
+
+/* Input group customizado */
+.custom-input-group {
+  display: flex;
+  align-items: center;
+  
+  .input-addon {
+    background: var(--surface-section);
+    border: 1px solid var(--surface-border);
+    border-right: none;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px 0 0 6px;
+    color: var(--text-color-secondary);
+  }
+  
+  .custom-input {
+    flex: 1;
+    border: 1px solid var(--surface-border);
+    border-left: none;
+    border-radius: 0 6px 6px 0;
+    padding: 0.5rem 0.75rem;
+    background: var(--surface-card);
+    color: var(--text-color);
+    
+    &:focus {
+      outline: none;
+      border-color: var(--primary-color);
+    }
+  }
+}
+
+/* // Responsividade */
+@media (max-width: 768px) {
+  .shared-vault-container {
+    padding: 0.5rem;
+  }
+  
+  .stat-card {
+    padding: 1rem;
+  }
+  
+  .tab-header {
+    flex-direction: column;
+    
+    .tab-button {
+      margin-bottom: 0.25rem;
+    }
+  }
+  
+  .table-container {
+    overflow-x: auto;
+    
+    table {
+      min-width: 800px;
+    }
+  }
+}

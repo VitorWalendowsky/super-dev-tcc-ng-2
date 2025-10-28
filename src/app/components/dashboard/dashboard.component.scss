@@ -12,5 +12,96 @@
     .p-card-body {
       padding: 1.5rem;
     }
+    
+    &.clickable-card {
+      cursor: pointer;
+      
+      &:hover {
+        background-color: var(--surface-hover);
+        
+        .text-primary {
+          color: var(--primary-color-dark) !important;
+        }
+      }
+    }
+  }
+  
+  // Estilos para a tabela
+  .p-datatable {
+    .p-datatable-tbody > tr {
+      transition: background-color 0.2s;
+      
+      &:hover {
+        background-color: var(--surface-hover) !important;
+      }
+    }
+    
+    .p-button.p-button-text {
+      color: var(--text-color-secondary);
+      
+      &:hover {
+        color: var(--primary-color);
+        background-color: rgba(59, 130, 246, 0.1);
+      }
+    }
+  }
+  
+  // Estilos para tags
+  .p-tag {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    
+    &.p-tag-success {
+      background-color: var(--success-color);
+    }
+    
+    &.p-tag-warning {
+      background-color: var(--warning-color);
+    }
+    
+    &.p-tag-danger {
+      background-color: var(--error-color);
+    }
+  }
+  
+  // Progress bar customizado
+  .p-progressbar {
+    height: 0.5rem;
+    background-color: var(--surface-border);
+    
+    .p-progressbar-value {
+      background-color: var(--primary-color);
+      transition: width 0.3s ease;
+    }
+  }
+}
+
+// Classes utilitárias
+.text-warning {
+  color: var(--warning-color) !important;
+}
+
+.text-danger {
+  color: var(--error-color) !important;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+}
+
+.w-6rem {
+  width: 6rem;
+}
+
+// Responsividade
+@media (max-width: 768px) {
+  :host ::ng-deep {
+    .stat-card .p-card-body {
+      padding: 1rem;
+    }
+    
+    .p-card .p-card-body {
+      padding: 1rem;
+    }
   }
 }
